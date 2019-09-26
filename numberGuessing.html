@@ -1,0 +1,49 @@
+<style>
+    p{
+        background-color:green;
+        color: yellow;
+        font-size: 30px;
+    }
+    input {
+        font-size: 30px;
+    }
+    button {
+        font-size: 30px;
+    }
+</style>
+<p id="result">Input your text!</p>
+<input id="number"/>
+<button onclick="testFunction()">Guess</button>
+<h3 id="pass"></h3>
+
+<script>
+    var currentNumber = Math.floor(Math.random()*10);
+    var count = 10;
+    var passText = "Pass Guesses: ";
+    function testFunction(){
+        var inputNumber = document.getElementById("number").value;
+        passText = passText + inputNumber + ' ';
+        document.getElementById("pass").innerHTML = passText;
+        if ( inputNumber == currentNumber){
+            document.getElementById("result").innerHTML = "Success!";
+            document.getElementById("result").style.backgroundColor = "green";
+            setTimeout(function(){
+                alert('YOU WIN!');
+                location.reload();
+            }, 500);
+        }
+        else {
+            count--;
+            var suggestion = "Your guess was too low, guess higher! ";
+            if (inputNumber > currentNumber){
+                suggestion = "Your guess was too high, guess lower! ";
+            }
+            document.getElementById("result").innerHTML = suggestion  + "You have " + count + " turns left";
+            document.getElementById("result").style.backgroundColor = "red";
+            if (count == 0){
+                alert('YOU LOSE!');
+                location.reload();
+            }
+        }
+    }
+</script>
